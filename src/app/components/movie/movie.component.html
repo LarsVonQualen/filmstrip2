@@ -1,0 +1,20 @@
+<div class="container" *ngIf="movie">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>{{ movie.Title }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <img [src]="movie.Poster" [alt]="movie.Title" class="img-thumbnail movie-poster" />
+    </div>
+    <div class="col-xs-8">
+      <ul class="list-inline">
+        <li class="list-inline-item tag {{ movie.Type | omdbTypeToTagType }}">{{ movie.Type | firstToUpper }}</li>
+        <li class="list-inline-item tag tag-default">{{ movie.Year }}</li>
+      </ul>
+      <h4>Plot</h4>
+      <p class="respect-line-breaks">{{ movie.Plot }}</p>
+    </div>
+  </div>
+</div>

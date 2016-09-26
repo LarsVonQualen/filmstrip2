@@ -1,0 +1,9 @@
+.navbar-text {
+  padding-top: .425rem;
+  padding-bottom: .425rem;
+  margin: 0;
+}
+
+.navbar-text .btn-link {
+  padding: 0;
+}

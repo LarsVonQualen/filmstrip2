@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-image">
+    <a [routerLink]="['/movies', result.imdbID]"><img [src]="result.Poster" [alt]="result.Title"></a>
+  </div>
+  <div class="card-block">
+    <h4 class="card-title" [ngbTooltip]="result.Title"><a [routerLink]="['/movies', result.imdbID]">{{ result.Title }}</a></h4>
+  </div>
+  <div class="card-block">
+    <ul class="list-inline pull-xs-left">
+      <li class="list-inline-item tag {{ result.Type | omdbTypeToTagType }}">{{ result.Type | firstToUpper }}</li>
+      <li class="list-inline-item tag tag-default">{{ result.Year }}</li>
+    </ul>
+    <span *ngIf="addingToCollection" class="pull-xs-right text-primary"><i class="fa fa-spinner fa-pulse"></i></span>
+    <span *ngIf="(isInCollection | async) === true && !addingToCollection" class="pull-xs-right text-success">In collection <i class="fa fa-check"></i></span>
+    <button *ngIf="(isInCollection | async) === false && !addingToCollection" type="button" class="card-link btn btn-link pull-xs-right" (click)="onAddToCollection()">Add to collection</button>
+  </div>
+</div>

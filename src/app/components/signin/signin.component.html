@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 offset-xs-3">
+      <form [formGroup]="signinForm" (submit)="submit($event)">
+        <!-- EMAIL -->
+        <div class="form-group row"
+        [ngClass]="{'has-success': !signinForm.controls.email.pristine && !signinForm.controls.email.errors, 'has-warning': !signinForm.controls.email.pristine && signinForm.controls.email.errors}">
+          <label for="email" class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+            <input type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Email"
+              [formControl]="signinForm.controls.email"
+              [ngClass]="{'form-control-success': !signinForm.controls.email.pristine && !signinForm.controls.email.errors, 'form-control-warning': !signinForm.controls.email.pristine && signinForm.controls.email.errors}">
+
+            <div class="form-control-feedback" *ngIf="!signinForm.controls.email.pristine && !signinForm.controls.email.errors">Looks good!</div>
+            <div class="form-control-feedback" *ngIf="!signinForm.controls.email.pristine && signinForm.controls.email.errors">Shucks, check the formatting of that and try again</div>
+          </div>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group row"
+          [ngClass]="{'has-success': !signinForm.controls.password.pristine && !signinForm.controls.password.errors, 'has-danger': !signinForm.controls.password.pristine && signinForm.controls.password.errors}">
+          <label for="password" class="col-sm-4 col-form-label">Password</label>
+          <div class="col-sm-8">
+            <input type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="Password"
+              [formControl]="signinForm.controls.password"
+              [ngClass]="{'form-control-success': !signinForm.controls.password.pristine && !signinForm.controls.password.errors, 'form-control-danger': !signinForm.controls.password.pristine && signinForm.controls.password.errors}">
+
+            <div class="form-control-feedback" *ngIf="!signinForm.controls.password.pristine && signinForm.controls.password.errors && signinForm.controls.password.errors.minlength">You need at least 8 characters</div>
+          </div>
+        </div>
+
+        <!-- SIGNIN -->
+        <div class="form-group row">
+          <div class="offset-sm-4 col-sm-8">
+            <button type="submit" class="btn btn-primary" [disabled]="signinForm.pristine || (!signinForm.pristine && signinForm.errors)" *ngIf="!loading">Sign in</button>
+            <button type="submit" class="btn btn-primary" disabled="disabled" *ngIf="loading"><i class="fa fa-spinner fa-pulse"></i> Loading</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 offset-xs-3">
+      <ngb-alert [dismissible]="false" [type]="'danger'" *ngIf="errMessage">
+        <strong>Whoops!</strong> {{errMessage}}
+      </ngb-alert>
+    </div>
+  </div>
+</div>

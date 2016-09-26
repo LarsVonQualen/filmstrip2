@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "movies": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "users": {
+      "$user_id": {
+        ".read": "auth != null && auth.uid === $user_id",
+        ".write": "auth != null && auth.uid === $user_id"
+      }
+    },
+    "collections": {
+      "$user_id": {
+        ".read": "auth != null && auth.uid === $user_id",
+        ".write": "auth != null && auth.uid === $user_id"
+      }
+    }
+  }
+}

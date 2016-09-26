@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 offset-xs-3">
+      <form [formGroup]="signupForm" (submit)="submit($event)">
+        <!-- EMAIL -->
+        <div class="form-group row"
+        [ngClass]="{'has-success': !signupForm.controls.email.pristine && !signupForm.controls.email.errors, 'has-warning': !signupForm.controls.email.pristine && signupForm.controls.email.errors}">
+          <label for="email" class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+            <input type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Email"
+              [formControl]="signupForm.controls.email"
+              [ngClass]="{'form-control-success': !signupForm.controls.email.pristine && !signupForm.controls.email.errors, 'form-control-warning': !signupForm.controls.email.pristine && signupForm.controls.email.errors}">
+
+            <div class="form-control-feedback" *ngIf="!signupForm.controls.email.pristine && !signupForm.controls.email.errors">Looks good!</div>
+            <div class="form-control-feedback" *ngIf="!signupForm.controls.email.pristine && signupForm.controls.email.errors">Shucks, check the formatting of that and try again</div>
+          </div>
+        </div>
+
+        <!-- CONFIRM EMAIL -->
+        <div class="form-group row"
+          [ngClass]="{'has-success': !signupForm.controls.confirmEmail.pristine && !signupForm.controls.confirmEmail.errors, 'has-danger': !signupForm.controls.confirmEmail.pristine && signupForm.controls.confirmEmail.errors}">
+          <label for="confirmEmail" class="col-sm-4 col-form-label">Confirm Email</label>
+          <div class="col-sm-8">
+            <input type="email"
+              class="form-control"
+              id="confirmEmail"
+              name="confirmEmail"
+              placeholder="Confirm Email"
+              [formControl]="signupForm.controls.confirmEmail"
+              [ngClass]="{'form-control-success': !signupForm.controls.confirmEmail.pristine && !signupForm.controls.confirmEmail.errors, 'form-control-danger': !signupForm.controls.confirmEmail.pristine && signupForm.controls.confirmEmail.errors}">
+
+            <div class="form-control-feedback" *ngIf="!signupForm.controls.confirmEmail.pristine && signupForm.controls.confirmEmail.errors && signupForm.controls.confirmEmail.errors.noMatch">Emails do not match each other</div>
+          </div>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group row"
+          [ngClass]="{'has-success': !signupForm.controls.password.pristine && !signupForm.controls.password.errors, 'has-danger': !signupForm.controls.password.pristine && signupForm.controls.password.errors}">
+          <label for="password" class="col-sm-4 col-form-label">Password</label>
+          <div class="col-sm-8">
+            <input type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="Password (Minimum length of 8)"
+              [formControl]="signupForm.controls.password"
+              [ngClass]="{'form-control-success': !signupForm.controls.password.pristine && !signupForm.controls.password.errors, 'form-control-danger': !signupForm.controls.password.pristine && signupForm.controls.password.errors}">
+
+            <div class="form-control-feedback" *ngIf="!signupForm.controls.password.pristine && !signupForm.controls.password.errors">I hope you picked a good password 😁</div>
+            <div class="form-control-feedback" *ngIf="!signupForm.controls.password.pristine && signupForm.controls.password.errors && signupForm.controls.password.errors.minlength">You need at least 8 characters</div>
+          </div>
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+        <div class="form-group row"
+          [ngClass]="{'has-success': !signupForm.controls.confirmPassword.pristine && !signupForm.controls.confirmPassword.errors, 'has-danger': !signupForm.controls.confirmPassword.pristine && signupForm.controls.confirmPassword.errors}">
+          <label for="confirmPassword" class="col-sm-4 col-form-label">Confirm Password</label>
+          <div class="col-sm-8">
+            <input type="password"
+              class="form-control"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              [formControl]="signupForm.controls.confirmPassword"
+              [ngClass]="{'form-control-success': !signupForm.controls.confirmPassword.pristine && !signupForm.controls.confirmPassword.errors, 'form-control-danger': !signupForm.controls.confirmPassword.pristine && signupForm.controls.confirmPassword.errors}">
+
+            <div class="form-control-feedback" *ngIf="!signupForm.controls.confirmPassword.pristine && signupForm.controls.confirmPassword.errors && signupForm.controls.confirmPassword.errors.noMatch">Passwords do not match each other</div>
+          </div>
+        </div>
+
+        <!-- SIGNUP -->
+        <div class="form-group row">
+          <div class="offset-sm-4 col-sm-8">
+            <button type="submit" class="btn btn-primary" [disabled]="signupForm.pristine || (!signupForm.pristine && signupForm.errors)" *ngIf="!saving">Sign up</button>
+            <button type="submit" class="btn btn-primary" disabled="disabled" *ngIf="saving"><i class="fa fa-spinner fa-pulse"></i> Saving</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 offset-xs-3">
+      <ngb-alert [dismissible]="false" [type]="'danger'" *ngIf="errMessage">
+        <strong>Whoops!</strong> {{errMessage}}
+      </ngb-alert>
+    </div>
+  </div>
+</div>
