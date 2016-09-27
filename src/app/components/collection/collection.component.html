@@ -29,6 +29,7 @@
             <th (click)="sortBy($event, 'imdbRating')" class="snug text-xs-center">IMDb Rating</th>
             <th (click)="sortBy($event, 'Year')" class="snug">Year</th>
             <th (click)="sortBy($event, 'Type')" class="snug">Type</th>
+            <th class="snug"></th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
             <td class="snug text-xs-center">{{movie.imdbRating}}</td>
             <td class="snug">{{movie.Year}}</td>
             <td class="snug"><span class="list-inline-item tag {{ movie.Type | omdbTypeToTagType }}">{{ movie.Type | firstToUpper }}</span></td>
+            <td><a href="" class="btn btn-sm btn-outline-danger" (click)="removeFromCollection($event, movie.imdbID)"><i class="fa fa-times" [ngbTooltip]="'Remove from collection'"></i></a></td>
           </tr>
         </tbody>
       </table>

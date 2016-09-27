@@ -82,6 +82,12 @@ export class CollectionComponent implements OnInit {
     this.sortOrder.next(order);
   }
 
+  public removeFromCollection($event: Event, key: string) {
+    $event.preventDefault();
+
+    this.collectionService.removeFromCollection(key).subscribe().unsubscribe();
+  }
+
   private applySorting(sorting: Sort, movies: Movie[]): Movie[] {
     if (movies.length && isFinite(movies[0][sorting.key])) {
       movies = movies.map(movie => {
