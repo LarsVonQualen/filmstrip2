@@ -2,7 +2,7 @@
   "rules": {
     "votes": {
       "$imdbId": {
-        ".read": "auth != null",
+        ".read": true,
 
         "$user_id": {
           ".write": "auth != null && auth.uid === $user_id"

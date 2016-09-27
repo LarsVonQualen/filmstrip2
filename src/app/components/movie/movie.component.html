@@ -17,7 +17,7 @@
             <div class="card-block">
               <a href="" class="btn btn-outline-danger btn-block" (click)="like($event)">{{ likes | async }} <i class="fa fa-heart-o"></i></a>
               <a href="https://www.imdb.com/title/{{ (movie | async)?.imdbID }}" class="btn btn-outline-warning btn-block" target="_blank">IMDb <i class="fa fa-film"></i></a>
-              <a href="{{ (movie | async)?.tomatoURL }}" class="btn btn-outline-default btn-block" target="_blank">Movie on Rotten Tomato</a>
+              <a *ngIf="(movie | async)?.tomatoURL !== 'N/A'" href="{{ (movie | async)?.tomatoURL }}" class="btn btn-outline-default btn-block" target="_blank">{{ (movie | async)?.Type | firstToUpper }} on Rotten Tomato</a>
               <ul class="list-inline d-block text-xs-center">
                 <li class="list-inline-item tag {{ (movie | async)?.Type | omdbTypeToTagType }}">{{ (movie | async)?.Type | firstToUpper }}</li>
                 <li class="list-inline-item tag tag-default">{{ (movie | async)?.Year }}</li>
