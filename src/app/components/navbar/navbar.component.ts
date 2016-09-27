@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   public hasDeterminedAuthState = false;
   public isAuthed = false;
   public user: User;
+  public isCollapsed = true;
 
   constructor(
     private router: Router,

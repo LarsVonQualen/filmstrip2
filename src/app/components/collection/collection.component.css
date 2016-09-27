@@ -1,0 +1,14 @@
+.snug {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.table tr:hover {
+  cursor: pointer;
+}
+
+.list-inline-item.active a {
+  pointer-events: none;
+  color: black;
+  text-decoration: none;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { OmdbService } from '../../services';
-import { Movie } from '../../models';
+import { OmdbService, VoteService } from '../../services';
+import { Movie, VoteRatios } from '../../models';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -12,25 +12,40 @@ import { Observable } from 'rxjs/Observable';
   ]
 })
 export class MovieComponent implements OnInit {
-  public movie: Movie;
+  public movie: Observable<Movie>;
+  public likes: Observable<number>;
 
   constructor(
     private route: ActivatedRoute,
-    private omdb: OmdbService
+    private omdbService: OmdbService,
+    private voteService: VoteService
   ) {
 
   }
 
   public ngOnInit() {
-    this.omdb
-        .lookupById(this.route.snapshot.params['movieId'], 'full')
-        .map(movie => {
+    this.movie = this.route.params
+        .switchMap(params => this.omdbService.lookupById(params['movieId'], 'full'))
+        .map((movie: Movie) => {
           if (!movie.Poster || movie.Poster === 'N/A') {
             movie.Poster = 'https://placehold.it/300x450';
           }
 
+          console.log(movie);
+
           return movie;
-        })
-        .subscribe(movie => this.movie = movie);
+        });
+
+    this.likes = this.route.params
+        .switchMap(params => this.voteService.getLikes(params['movieId']));
+  }
+
+  public like($event) {
+    $event.preventDefault();
+
+    this.route.params
+        .switchMap(params => this.voteService.like(params['movieId']))
+        .subscribe(() => {})
+        .unsubscribe();
   }
 }

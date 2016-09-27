@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SearchResult } from '../../models';
-import { CollectionService } from '../../services';
+import { CollectionService, VoteService } from '../../services';
 
 @Component({
   selector: 'fs-search-result',
@@ -14,11 +14,14 @@ import { CollectionService } from '../../services';
 export class SearchResultComponent {
   @Input() result: SearchResult;
 
+  public likes: Observable<number>;
+
   public isInCollection = new BehaviorSubject<boolean>(undefined);
   public addingToCollection = false;
 
   constructor(
-    private collectionService: CollectionService
+    private collectionService: CollectionService,
+    private voteService: VoteService
   ) {}
 
   public ngOnInit() {
@@ -26,9 +29,13 @@ export class SearchResultComponent {
       .subscribe(movie => {
         this.isInCollection.next(movie !== null);
       });
+
+    this.likes = this.voteService.getLikes(this.result.imdbID);
   }
 
-  public onAddToCollection() {
+  public onAddToCollection($event: Event) {
+    $event.preventDefault();
+
     this.addingToCollection = true;
 
     this.collectionService
@@ -37,5 +44,13 @@ export class SearchResultComponent {
         this.addingToCollection = false;
         this.isInCollection.next(true);
       });
+  }
+
+  public like($event) {
+    $event.preventDefault();
+
+    this.voteService.like(this.result.imdbID)
+        .subscribe(() => {})
+        .unsubscribe();
   }
 }

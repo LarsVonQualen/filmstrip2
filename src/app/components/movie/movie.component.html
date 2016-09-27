@@ -1,20 +1,66 @@
-<div class="container" *ngIf="movie">
+<div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h1>{{ movie.Title }}</h1>
+      <h1>{{ (movie | async)?.Title }}</h1>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-4">
-      <img [src]="movie.Poster" [alt]="movie.Title" class="img-thumbnail movie-poster" />
+    <div class="col-xs-12 col-md-3 col-lg-3">
+      <div class="row">
+        <div class="col-xs-12">
+          <img [src]="(movie | async)?.Poster" [alt]="(movie | async)?.Title" class="img-thumbnail movie-poster" />
+        </div>
+      </div>
+      <div class="row votes">
+        <div class="col-xs-12">
+          <div class="card">
+            <div class="card-block">
+              <a href="" class="btn btn-outline-danger btn-block" (click)="like($event)">{{ likes | async }} <i class="fa fa-heart-o"></i></a>
+              <a href="https://www.imdb.com/title/{{ (movie | async)?.imdbID }}" class="btn btn-outline-warning btn-block" target="_blank">IMDb <i class="fa fa-film"></i></a>
+              <a href="{{ (movie | async)?.tomatoURL }}" class="btn btn-outline-default btn-block" target="_blank">Movie on Rotten Tomato</a>
+              <ul class="list-inline d-block text-xs-center">
+                <li class="list-inline-item tag {{ (movie | async)?.Type | omdbTypeToTagType }}">{{ (movie | async)?.Type | firstToUpper }}</li>
+                <li class="list-inline-item tag tag-default">{{ (movie | async)?.Year }}</li>
+                <li class="list-inline-item tag tag-default">{{ (movie | async)?.Rated }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-8">
-      <ul class="list-inline">
-        <li class="list-inline-item tag {{ movie.Type | omdbTypeToTagType }}">{{ movie.Type | firstToUpper }}</li>
-        <li class="list-inline-item tag tag-default">{{ movie.Year }}</li>
-      </ul>
-      <h4>Plot</h4>
-      <p class="respect-line-breaks">{{ movie.Plot }}</p>
+    <div class="col-xs-12 col-md-9 col-lg-9">
+      <div class="card">
+        <div class="card-block">
+          <h4>Plot</h4>
+          <p class="respect-line-breaks">{{ (movie | async)?.Plot }}</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-block">
+          <dl class="row">
+            <dt class="col-sm-3">Genre</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.Genre }}</dd>
+            <dt class="col-sm-3">Director</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.Director }}</dd>
+            <dt class="col-sm-3">Writer</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.Writer }}</dd>
+            <dt class="col-sm-3">Actors</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.Actors }}</dd>
+            <dt class="col-sm-3">Awards</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.Awards }}</dd>
+            <dt class="col-sm-3">Released</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.Released }}</dd>
+            <dt class="col-sm-3">Production</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.Production }}</dd>
+            <dt class="col-sm-3">IMDb Rating</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.imdbRating }} ({{ (movie | async)?.imdbVotes }} votes)</dd>
+            <dt class="col-sm-3">Tomato Rating</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.tomatoRating }} ({{ (movie | async)?.tomatoReviews }} reviews)</dd>
+            <dt class="col-sm-3">Tomato User Rating</dt>
+            <dd class="col-sm-9">{{ (movie | async)?.tomatoUserRating }} ({{ (movie | async)?.tomatoUserReviews }} reviews)</dd>
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 </div>

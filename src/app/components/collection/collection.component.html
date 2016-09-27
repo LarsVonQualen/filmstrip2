@@ -1,1 +1,46 @@
-collection.html
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Collection</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="list-inline">
+        <li class="list-inline-item font-weight-bold">Sort by:</li>
+        <li class="list-inline-item" [class.active]="(sortKey | async) === 'Title'"><a href="" (click)="sortBy($event, 'Title')">Title</a></li>
+        <li class="list-inline-item" [class.active]="(sortKey | async) === 'Year'"><a href="" (click)="sortBy($event, 'Year')">Year</a></li>
+        <li class="list-inline-item" [class.active]="(sortKey | async) === 'Type'"><a href="" (click)="sortBy($event, 'Type')">Type</a></li>
+        <li class="list-inline-item" [class.active]="(sortKey | async) === 'imdbRating'"><a href="" (click)="sortBy($event, 'imdbRating')">IMDb Rating</a></li>
+        <li class="list-inline-item font-weight-bold">Order:</li>
+        <li class="list-inline-item" [class.active]="(sortOrder | async) === 'ascending'"><a href="" (click)="setOrder($event, 'ascending')">Ascending</a></li>
+        <li class="list-inline-item" [class.active]="(sortOrder | async) === 'descending'"><a href="" (click)="setOrder($event, 'descending')">Descending</a></li>
+        <li class="list-inline-item"><a href="" (click)="clearSorting($event)"><i class="fa fa-times"></i> Clear</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-hover">
+        <thead class="thead-inverse">
+          <tr>
+            <th (click)="sortBy($event, 'Title')">Title</th>
+            <th class="snug text-xs-center"><i class="fa fa-heart-o"></i></th>
+            <th (click)="sortBy($event, 'imdbRating')" class="snug text-xs-center">IMDb Rating</th>
+            <th (click)="sortBy($event, 'Year')" class="snug">Year</th>
+            <th (click)="sortBy($event, 'Type')" class="snug">Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of collection | async" (click)="navigateTo(movie.imdbID)">
+            <td scope="row">{{movie.Title}}</td>
+            <td class="snug text-xs-center">{{ (likes | async)[movie.imdbID] | async }}</td>
+            <td class="snug text-xs-center">{{movie.imdbRating}}</td>
+            <td class="snug">{{movie.Year}}</td>
+            <td class="snug"><span class="list-inline-item tag {{ movie.Type | omdbTypeToTagType }}">{{ movie.Type | firstToUpper }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

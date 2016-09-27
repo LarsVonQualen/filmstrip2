@@ -1,7 +1,7 @@
-.container {
-  margin-top: 1em;
-}
-
 .movie-poster {
   width: 100%;
+}
+
+.row.votes {
+  margin-top: 1em;
 }

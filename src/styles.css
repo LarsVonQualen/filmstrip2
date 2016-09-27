@@ -1,7 +1,17 @@
 body {
   margin: 1em;
+  margin-top: 0;
+  padding-top: 3.375em;
 }
 
 .respect-line-breaks {
   white-space: pre-line;
+}
+
+.container {
+  margin-top: 1em;
+}
+
+nav.navbar .container {
+  margin-top: 0;
 }

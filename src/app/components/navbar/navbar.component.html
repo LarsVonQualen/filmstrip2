@@ -1,23 +1,30 @@
-<nav class="navbar navbar-light bg-faded">
-  <a class="navbar-brand" href="#">Filmstrip</a>
-  <ul class="nav navbar-nav" *ngIf="hasDeterminedAuthState">
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" [routerLink]="['/home']">Home</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']" *ngIf="isAuthed">
-      <a class="nav-link" [routerLink]="['/collection']" href="#">Collection</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" [routerLink]="['/about']">About</a>
-    </li>
-  </ul>
-  <ul class="nav navbar-nav pull-xs-right" *ngIf="hasDeterminedAuthState && isAuthed">
-    <li class="nav-item">
-      <p class="navbar-text text-muted">Hi, {{user.email}}, <button type="button" class="btn btn-link" (click)="signOut()">sign out</button>!</p>
-    </li>
-  </ul>
-  <form class="form-inline pull-xs-right" *ngIf="hasDeterminedAuthState && !isAuthed">
-    <a class="btn btn-outline-primary" [routerLink]="['/signup']">Sign up</a>
-    <a class="btn btn-outline-success" [routerLink]="['/signin']">Sign in</a>
-  </form>
+<nav class="navbar navbar-fixed-top navbar-light bg-faded">
+  <div class="container">
+    <button class="navbar-toggler hidden-md-up" type="button" (click)="isCollapsed = !isCollapsed" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      &#9776;
+    </button>
+    <div class="collapse navbar-toggleable-sm" [ngbCollapse]="isCollapsed" id="exCollapsingNavbar">
+      <a class="navbar-brand" href="#">Filmstrip</a>
+      <ul class="nav navbar-nav" *ngIf="hasDeterminedAuthState">
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/home']">Home</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']" *ngIf="isAuthed">
+          <a class="nav-link" [routerLink]="['/collection']" href="#">Collection</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" [routerLink]="['/about']">About</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav pull-xs-right" *ngIf="hasDeterminedAuthState && isAuthed">
+        <li class="nav-item">
+          <p class="navbar-text text-muted">Hi, {{user.email}}, <button type="button" class="btn btn-link" (click)="signOut()">sign out</button>!</p>
+        </li>
+      </ul>
+      <form class="form-inline pull-xs-right" *ngIf="hasDeterminedAuthState && !isAuthed">
+        <a class="btn btn-outline-primary" [routerLink]="['/signup']">Sign up</a>
+        <a class="btn btn-outline-success" [routerLink]="['/signin']">Sign in</a>
+      </form>
+    </div>
+  </div>
 </nav>
