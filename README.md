@@ -124,6 +124,13 @@ npm start
 npm run deploy:prod
 ```
 
+### 7. ????
+
+
+### 8. Profit! 💰🤑💰🤑💰🤑💰🤑💰🤑💰🤑
+
+Hit up [http://localhost:4200](http://localhost:4200)
+
 # Angular CLI Readme
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.15.
