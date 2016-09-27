@@ -66,8 +66,8 @@ const firebaseConfig: FirebaseConfig = {
   apiKey: '<your-key>',
   authDomain: '<your-project-authdomain>',
   databaseURL: '<your-database-URL>',
-  storageBucket: '<your-storage-bucket>'
-  messagingSenderId: "<your-messaging-sender-id>"
+  storageBucket: '<your-storage-bucket>',
+  messagingSenderId: '<your-messaging-sender-id>'
 };
 
 const firebaseAuthConfig: FirebaseAuthConfig = {
@@ -93,8 +93,8 @@ const firebaseConfig: FirebaseConfig = {
   apiKey: '<your-key>',
   authDomain: '<your-project-authdomain>',
   databaseURL: '<your-database-URL>',
-  storageBucket: '<your-storage-bucket>'
-  messagingSenderId: "<your-messaging-sender-id>"
+  storageBucket: '<your-storage-bucket>',
+  messagingSenderId: '<your-messaging-sender-id>'
 };
 
 const firebaseAuthConfig: FirebaseAuthConfig = {
