@@ -1,0 +1,23 @@
+import { AuthProviders, AuthMethods, FirebaseAuthConfig, FirebaseConfig } from 'angularfire2';
+
+const firebaseConfig: FirebaseConfig = {
+  apiKey: '<your-key>',
+  authDomain: '<your-project-authdomain>',
+  databaseURL: '<your-database-URL>',
+  storageBucket: '<your-storage-bucket>',
+  messagingSenderId: '<your-messaging-sender-id>'
+};
+
+const firebaseAuthConfig: FirebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Password
+};
+
+export const environment = {
+  // NOTICE THIS FLAG
+  production: true,
+  firebase: {
+    config: firebaseConfig,
+    authConfig: firebaseAuthConfig
+  }
+};
